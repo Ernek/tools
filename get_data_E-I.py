@@ -12,7 +12,7 @@ def read_energy_file(energy_file):
     df_ener.drop(df_ener.columns[[0,2,3]], axis=1, inplace=True)
     column_labels = ['State', 'Energy']
     df_ener.columns = column_labels
-    df_ener['DeltaE_meV'] = (df_ener['Energy'] - df_ener['Energy'][0])*27.21*1000
+    #df_ener['DeltaE_meV'] = (df_ener['Energy'] - df_ener['Energy'][0])*27.21*1000
 
     return df_ener
 
@@ -24,7 +24,8 @@ def read_osct_file(osct_file, energy_file, nstates,nstate_to_keep):
     dict_gs_total = {}
     for i in range(1,nstates+1):
         df_osct_state = df_osct[df_osct['State'] == i].reset_index(drop=True)
-        df_osct_state['Exc Energy'] = df_ener['DeltaE_meV'][i:].reset_index(drop=True) 
+        df_ener['DeltaE_meV'] = (df_ener['Energy'][i-1:] - df_ener['Energy'][i-1])*27.21*1000
+        df_osct_state['Exc Energy'] = df_ener['DeltaE_meV'][i-1:].reset_index(drop=True) 
         dict_gs_total[f"{str(i)}"] = df_osct_state
 
     if nstate_to_keep:
