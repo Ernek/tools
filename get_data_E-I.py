@@ -40,7 +40,7 @@ def read_osct_file(osct_file, energy_file, nstates,nstate_to_keep):
 def save_energ_osct_data_to_file(osct_file, energy_file, base_output_name, nstates, nstate_to_keep):
     df_osct, df_gs_total = read_osct_file(osct_file, energy_file, nstates, nstate_to_keep)
     df_gs_total[['State', 'Exc Energy','Oscillator Strength']].to_csv(f'data_to_plot_{base_output_name}.txt', sep=' ', header=False, index=False)
-    df_gs_total[['State', 'Exc Energy','Oscillator Strength']].to_csv(f'data_to_plot_{base_output_name}.csv', sep=' ', header=False, index=False)
+    #df_gs_total[['State', 'Exc Energy','Oscillator Strength']].to_csv(f'data_to_plot_{base_output_name}.csv', sep=' ', header=False, index=False)
 
 if __name__ == '__main__':
     #Criteria to decide whether two energies are or not degenerate 
